@@ -118,9 +118,10 @@ updatePaneGUI window nodesState params acceptors nodesStateElems = do
     void $ updateElementValue (ElementInteger $ nmRTSGcNum nm)                $ elements ! ElRTSGcNum
     void $ updateElementValue (ElementInteger $ nmRTSGcMajorNum nm)           $ elements ! ElRTSGcMajorNum
 
-    updateKESInfo [ (niOpCertStartKESPeriod ni, elements ! ElOpCertStartKESPeriod)
-                  , (niCurrentKESPeriod ni,     elements ! ElCurrentKESPeriod)
-                  , (niRemainingKESPeriods ni,  elements ! ElRemainingKESPeriods)
+    updateKESInfo [ (niOpCertStartKESPeriod ni,  elements ! ElOpCertStartKESPeriod)
+                  , (niOpCertExpiryKESPeriod ni, elements ! ElOpCertExpiryKESPeriod)
+                  , (niCurrentKESPeriod ni,      elements ! ElCurrentKESPeriod)
+                  , (niRemainingKESPeriods ni,   elements ! ElRemainingKESPeriods)
                   ]
 
     updatePeersList (niPeersInfo ni) peerInfoItems
@@ -171,9 +172,10 @@ updateGridGUI window nodesState _params acceptors gridNodesStateElems =
     void $ updateElementValue (ElementInteger $ nmRTSGcNum nm)           $ elements ! ElRTSGcNum
     void $ updateElementValue (ElementInteger $ nmRTSGcMajorNum nm)      $ elements ! ElRTSGcMajorNum
 
-    updateKESInfo [ (niOpCertStartKESPeriod ni, elements ! ElOpCertStartKESPeriod)
-                  , (niCurrentKESPeriod ni,     elements ! ElCurrentKESPeriod)
-                  , (niRemainingKESPeriods ni,  elements ! ElRemainingKESPeriods)
+    updateKESInfo [ (niOpCertStartKESPeriod ni,  elements ! ElOpCertStartKESPeriod)
+                  , (niOpCertExpiryKESPeriod ni, elements ! ElOpCertExpiryKESPeriod)
+                  , (niCurrentKESPeriod ni,      elements ! ElCurrentKESPeriod)
+                  , (niRemainingKESPeriods ni,   elements ! ElRemainingKESPeriods)
                   ]
 
 updateElementValue
@@ -360,9 +362,10 @@ markOutdatedElements params ni nm els = do
                                                 , els ! ElNodeCommitHref
                                                 ]
   markValues now (niEpochLastUpdate ni) bcLife [els ! ElEpoch]
-  markValues now (niOpCertStartKESPeriodLastUpdate ni) niLife [els ! ElOpCertStartKESPeriod]
-  markValues now (niCurrentKESPeriodLastUpdate ni)     niLife [els ! ElCurrentKESPeriod]
-  markValues now (niRemainingKESPeriodsLastUpdate ni)  niLife [els ! ElRemainingKESPeriods]
+  markValues now (niOpCertStartKESPeriodLastUpdate ni)  niLife [els ! ElOpCertStartKESPeriod]
+  markValues now (niOpCertExpiryKESPeriodLastUpdate ni) niLife [els ! ElOpCertExpiryKESPeriod]
+  markValues now (niCurrentKESPeriodLastUpdate ni)      niLife [els ! ElCurrentKESPeriod]
+  markValues now (niRemainingKESPeriodsLastUpdate ni)   niLife [els ! ElRemainingKESPeriods]
 
   markValues now (niSlotLastUpdate ni)               bcLife [els ! ElSlot]
   markValues now (niBlocksNumberLastUpdate ni)       bcLife [els ! ElBlocksNumber]

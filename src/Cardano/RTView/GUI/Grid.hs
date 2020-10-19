@@ -61,6 +61,7 @@ metricLabel ElUptime                = ("Node uptime", "How long the node is work
 metricLabel ElTraceAcceptorEndpoint = ("Node endpoint", "Socket/pipe used to connect the node with RTView")
 metricLabel ElPeersNumber           = ("Peers number", "Number of peers connected to the node")
 metricLabel ElOpCertStartKESPeriod  = ("Start KES period", "Certificate KES start period")
+metricLabel ElOpCertExpiryKESPeriod = ("Expiry KES period", "Certificate KES expiry period")
 metricLabel ElCurrentKESPeriod      = ("Current KES period", "Current KES period")
 metricLabel ElRemainingKESPeriods   = ("KES remaining periods", "KES periods until expiry")
 metricLabel ElMemoryUsageChart      = ("Memory usage", "Memory used by the node, in MB")
@@ -94,6 +95,7 @@ allMetricsNames =
   , ElTraceAcceptorEndpoint
   , ElPeersNumber
   , ElOpCertStartKESPeriod
+  , ElOpCertExpiryKESPeriod
   , ElCurrentKESPeriod
   , ElRemainingKESPeriods
   , ElMemoryUsageChart
@@ -159,11 +161,12 @@ mkNodeElements nameOfNode = do
                  # set UI.title__ "Browse cardano-node repository on this commit"
                  #+ [string ""]
   elUptime      <- string "00:00:00"
-  elTraceAcceptorEndpoint <- string "localhost:0"
+  elTraceAcceptorEndpoint <- string "0.0.0.0:0"
   elPeersNumber <- string "0"
-  elOpCertStartKESPeriod <- string "-"
-  elCurrentKESPeriod     <- string "-"
-  elRemainingKESPeriods  <- string "-"
+  elOpCertStartKESPeriod  <- string "-"
+  elOpCertExpiryKESPeriod <- string "-"
+  elCurrentKESPeriod      <- string "-"
+  elRemainingKESPeriods   <- string "-"
 
   elMemoryUsageChart
     <- UI.canvas ## (show GridMemoryUsageChartId <> T.unpack nameOfNode)
@@ -208,6 +211,7 @@ mkNodeElements nameOfNode = do
       , (ElTraceAcceptorEndpoint, elTraceAcceptorEndpoint)
       , (ElPeersNumber,           elPeersNumber)
       , (ElOpCertStartKESPeriod,  elOpCertStartKESPeriod)
+      , (ElOpCertExpiryKESPeriod, elOpCertExpiryKESPeriod)
       , (ElCurrentKESPeriod,      elCurrentKESPeriod)
       , (ElRemainingKESPeriods,   elRemainingKESPeriods)
       , (ElMemoryUsageChart,      elMemoryUsageChart)

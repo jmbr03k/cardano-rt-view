@@ -193,6 +193,8 @@ updateNodesState nsMVar loggerName (LogObject aName aMeta aContent) = do
             case aContent of
               LogValue "operationalCertificateStartKESPeriod" (PureI oCertStartKesPeriod) ->
                 nodesStateWith $ updateCertStartKESPeriod ns oCertStartKesPeriod now
+              LogValue "operationalCertificateExpiryKESPeriod" (PureI oCertExpiryKesPeriod) ->
+                nodesStateWith $ updateCertExpiryKESPeriod ns oCertExpiryKesPeriod now
               LogValue "currentKESPeriod" (PureI currentKesPeriod) ->
                 nodesStateWith $ updateCurrentKESPeriod ns currentKesPeriod now
               LogValue "remainingKESPeriods" (PureI kesPeriodsUntilExpiry) ->
@@ -625,6 +627,16 @@ updateCertStartKESPeriod ns oCertStartKesPeriod now = ns { nsInfo = newNi }
     currentNi
       { niOpCertStartKESPeriod = oCertStartKesPeriod
       , niOpCertStartKESPeriodLastUpdate = now
+      }
+  currentNi = nsInfo ns
+
+updateCertExpiryKESPeriod :: NodeState -> Integer -> Word64 -> NodeState
+updateCertExpiryKESPeriod ns oCertExpiryKesPeriod now = ns { nsInfo = newNi }
+ where
+  newNi =
+    currentNi
+      { niOpCertExpiryKESPeriod = oCertExpiryKesPeriod
+      , niOpCertExpiryKESPeriodLastUpdate = now
       }
   currentNi = nsInfo ns
 

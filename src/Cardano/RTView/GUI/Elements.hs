@@ -60,6 +60,7 @@ data ElementName
   | ElTraceAcceptorPort
   | ElTraceAcceptorEndpoint
   | ElOpCertStartKESPeriod
+  | ElOpCertExpiryKESPeriod
   | ElCurrentKESPeriod
   | ElRemainingKESPeriods
   | ElNodeErrors
